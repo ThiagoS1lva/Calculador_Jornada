@@ -30,7 +30,7 @@
         <button type="submit">Calcular</button>
       </form>
   
-      <div v-if="horaSaida">
+      <div class="horasaida" v-if="horaSaida">
         <h2>Horário de Saída</h2>
         <p>{{ horaSaida }}</p>
       </div>
@@ -85,6 +85,15 @@
   </script>
   
   <style>
+  .horasaida {
+    text-align: center;
+    background: #f9f9f9;
+    border: 1px solid #e3e3e3;
+  }
+  .horasaida p {
+    font-size: 1.5em;
+    margin: 0.5em;
+  }
   body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
