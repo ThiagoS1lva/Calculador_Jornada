@@ -7,7 +7,7 @@
           <input
             type="time"
             id="horasTrabalhadas"
-            v-model="horasTrabalhadas"
+            v-model="horasTrabalhadas" 
             required
           />
         </div>
@@ -26,7 +26,15 @@
           <label for="horasExtras">Horas extras (HH:MM):</label>
           <input type="time" id="horasExtras" v-model="horasExtras" />
         </div>
-  
+        
+        <div>
+          <label for="horaAlmoço">Hora de almoço</label>
+          <select class="horaAlmoço" id="horaAlmoço" v-model="horaAlmoço">
+            <option value="01:00">01:00</option>
+            <option value="00:30">00:30</option>
+          </select>
+        </div>
+
         <button type="submit">Calcular</button>
       </form>
   
@@ -42,6 +50,7 @@
     data() {
       return {
         horasTrabalhadas: "08:48",
+        horaAlmoço: "01:00",
         horaChegada: "",
         horasExtras: "",
         horaSaida: null,
@@ -57,12 +66,15 @@
         const [horasExtrasHoras, horasExtrasMinutos] = this.horasExtras
           ? this.horasExtras.split(":").map(Number)
           : [0, 0];
+        //Converter hora do almoço em minutos
+        const [horaAlmoçoHoras, horaAlmoçoMinutos] =
+          this.horaAlmoço.split(":").map(Number);
   
         // Soma total de minutos trabalhados
         const minutosTotais =
-          (horasTrabalhadasHoras + 1 + horasExtrasHoras) * 60 + // +1 por 1h de almoço
+          (horasTrabalhadasHoras + horaAlmoçoHoras + horasExtrasHoras) * 60 + // +1 por 1h de almoço
           horasTrabalhadasMinutos +
-          horasExtrasMinutos;
+          horasExtrasMinutos + horaAlmoçoMinutos;
   
         // Hora de chegada em minutos
         const minutosChegada =
@@ -93,6 +105,15 @@
   .horasaida p {
     font-size: 1.5em;
     margin: 0.5em;
+  }
+  .horaAlmoço {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.5em;
+    margin-bottom: 1em;
+  }
+  .horaAlmoço option {
+    padding: 0.5em;
   }
   body {
     font-family: Arial, sans-serif;
