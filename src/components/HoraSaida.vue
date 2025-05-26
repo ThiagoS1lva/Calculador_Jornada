@@ -49,7 +49,7 @@
   export default {
     data() {
       return {
-        horasTrabalhadas: "08:48",
+        horasTrabalhadas: "08:00",
         horaAlmoço: "01:00",
         horaChegada: "",
         horasExtras: "",
